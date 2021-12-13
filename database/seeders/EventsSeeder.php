@@ -19,32 +19,32 @@ class EventsSeeder extends Seeder
             [
                 'title'     =>  'User 2 - Event 1', 
                 'userId'    =>  2,
-                'start'     =>  Carbon::now()->toDateTimeString(),
-                'end'       =>  Carbon::now()->toDateTimeString()
+                'start'     =>  Carbon::now()->startOfDay()->toDateTimeString(),
+                'end'       =>  Carbon::now()->addDays(1)->startOfDay()->toDateTimeString()
             ],
             [
                 'title'     =>  'User 2 - Event 2', 
                 'userId'    =>  2,
-                'start'     =>  Carbon::now()->addDays(1)->toDateTimeString(),
-                'end'       =>  Carbon::now()->addDays(1)->toDateTimeString()
+                'start'     =>  Carbon::now()->addDays(1)->startOfDay()->toDateTimeString(),
+                'end'       =>  Carbon::now()->addDays(2)->startOfDay()->toDateTimeString()
             ],
             [
                 'title'     =>  'User 3 - Event 1', 
                 'userId'    =>  3,
-                'start'     =>  Carbon::now()->toDateTimeString(),
-                'end'       =>  Carbon::now()->toDateTimeString()
+                'start'     =>  Carbon::now()->startOfDay()->toDateTimeString(),
+                'end'       =>  Carbon::now()->addDays(1)->startOfDay()->toDateTimeString()
             ],
             [
                 'title'     =>  'User 3 - Event 2', 
                 'userId'    =>  3,
-                'start'     =>  Carbon::now()->addDays(1)->toDateTimeString(),
-                'end'       =>  Carbon::now()->addDays(1)->toDateTimeString()
+                'start'     =>  Carbon::now()->addDays(1)->startOfDay()->toDateTimeString(),
+                'end'       =>  Carbon::now()->addDays(2)->startOfDay()->toDateTimeString()
             ],
             [
                 'title'     =>  'User 3 - Event 3', 
                 'userId'    =>  3,
-                'start'     =>  Carbon::now()->addDays(2)->toDateTimeString(),
-                'end'       =>  Carbon::now()->addDays(2)->toDateTimeString()
+                'start'     =>  Carbon::now()->addDays(2)->startOfDay()->toDateTimeString(),
+                'end'       =>  Carbon::now()->addDays(3)->startOfDay()->toDateTimeString()
             ]
         ];
 
