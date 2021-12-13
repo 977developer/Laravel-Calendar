@@ -54,6 +54,9 @@ class UserController extends Controller
     $input = $request->all();
     $input['password'] = Hash::make($input['password']);
 
+    $hexColors = ['#1abc9c', '#3498db', '#9b59b6', '#e67e22', '#e74c3c'];
+    $input['color'] = array_rand($hexColors);
+
     $user = User::create($input);
     $user->assignRole($request->input('roles'));
 

@@ -24,14 +24,14 @@ class UsersSeeder extends Seeder
             'name'     => 'Normal User', 
             'email'    => 'user@example.com',
             'password' => bcrypt('user'),
-            'color'    => $hexColors[0];
+            'color'    => $hexColors[0],
           ]),
           
           User::create([
             'name'     => 'User Two', 
             'email'    => 'user2@example.com',
             'password' => bcrypt('user2'),
-            'color'    => $hexColors[1];
+            'color'    => $hexColors[1],
           ])
         ];
   

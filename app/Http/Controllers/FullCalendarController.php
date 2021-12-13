@@ -5,8 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Redirect,Response;
-use Illuminate\Support\Facades\Auth;
+use Redirect, Response, Auth;
 
 class FullCalendarController extends Controller
 {
@@ -15,30 +14,30 @@ class FullCalendarController extends Controller
   {
     if(request()->ajax()) 
     {
-      $start = (!empty($_GET["start"])) ? ($_GET["start"]) : ('');
-      $end   = (!empty($_GET["end"])) ? ($_GET["end"]) : ('');
+      $start = request('start');
+      $end   = request('end');
 
       // Public or individual events
       $data = Event::whereDate('start', '>=', $start)
-        ->whereDate('end',   '<=', $end)
+        ->whereDate('end', '<=', $end)
         ->where(function($query) {
-          // The user is logged in...
-          if (Auth::check()) {
+          // The user is logged in
+          if (Auth::check() && request('page') != 'homepage') {
             $query->where('userId', Auth::id());
           }
         })
+        ->with('user')
         ->get(['id','title','start', 'end', 'userId']);
 
       return Response::json($data);
     }
-
-    // return view('fullcalendar');
   }
 
 
   public function create(Request $request)
   {  
-    $insertArr = [ 'title' => $request->title,
+    $insertArr = [ 
+      'title' => $request->title,
       'start'   => $request->start,
       'userId'  => Auth::id(),
       'end'     => $request->end
