@@ -16,4 +16,6 @@ class Event extends Model
     {
       return $this->belongsTo(User::class, 'userId');
     }
+
+    protected $fillable = ['title','userId', 'eventColor', 'start','end'];
 }

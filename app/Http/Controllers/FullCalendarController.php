@@ -21,22 +21,27 @@ class FullCalendarController extends Controller
       // Public or individual events
       $data = Event::whereDate('start', '>=', $start)
         ->whereDate('end',   '<=', $end)
-        ->where('userId', Auth::id())
-        ->get(['id','title','start', 'end']);
+        ->where(function($query) {
+          // The user is logged in...
+          if (Auth::check()) {
+            $query->where('userId', Auth::id());
+          }
+        })
+        ->get(['id','title','start', 'end', 'userId']);
 
       return Response::json($data);
     }
 
-    return view('fullcalendar');
+    // return view('fullcalendar');
   }
 
 
   public function create(Request $request)
   {  
     $insertArr = [ 'title' => $request->title,
-    'start'   => $request->start,
-    'userId'  => Auth::id(),
-    'end'     => $request->end
+      'start'   => $request->start,
+      'userId'  => Auth::id(),
+      'end'     => $request->end
     ];
 
     $event = Event::insert($insertArr);

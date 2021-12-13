@@ -16,26 +16,43 @@ class UsersSeeder extends Seeder
      */
     public function run()
     {
-        $user = User::create([
-            'name' => 'Normal User', 
-            'email' => 'user@example.com',
-            'password' => bcrypt('user')
-        ]);
+        
+        $hexColors = ['#1abc9c', '#3498db', '#9b59b6', '#e67e22', '#e74c3c'];
+
+        $users = [
+          User::create([
+            'name'     => 'Normal User', 
+            'email'    => 'user@example.com',
+            'password' => bcrypt('user'),
+            'color'    => $hexColors[0];
+          ]),
+          
+          User::create([
+            'name'     => 'User Two', 
+            'email'    => 'user2@example.com',
+            'password' => bcrypt('user2'),
+            'color'    => $hexColors[1];
+          ])
+        ];
   
         $role = Role::create(['name' => 'User']);
    
         $allowedPermissions = [
-           'calendar-list',
-           'calendar-create',
-           'calendar-edit',
-           'calendar-delete'
+         'calendar-list',
+         'calendar-create',
+         'calendar-edit',
+         'calendar-delete'
         ];
 
         $permissions = Permission::whereIn('name', $allowedPermissions)
-            ->pluck('id','name')->all();
+          ->pluck('id','name')->all();
 
         $role->syncPermissions($permissions);
-   
-        $user->assignRole([$role->id]);
+
+        // Assign role to each user   
+        foreach ($users as $user) {
+          $user->assignRole([$role->id]);
+        }
+
     }
 }
