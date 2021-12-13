@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Redirect,Response;
 use Illuminate\Support\Facades\Auth;
@@ -20,6 +21,7 @@ class FullCalendarController extends Controller
       // Public or individual events
       $data = Event::whereDate('start', '>=', $start)
         ->whereDate('end',   '<=', $end)
+        ->where('userId', Auth::id())
         ->get(['id','title','start', 'end']);
 
       return Response::json($data);
@@ -60,20 +62,3 @@ class FullCalendarController extends Controller
     return Response::json($event);
   }    
 }
-// public function index()
-// {
-//    $events = [];
-//    $data = Booking::all();
-//    if($data->count()){
-//       foreach ($data as $key => $value) {
-//         $events[] = \Calendar::event(
-//             $value->title,
-//             true,
-//             new \DateTime($value->start),
-//             new \DateTime($value->end.' +1 day')
-//         );
-//       }
-//    }
-//   $calendar = \Calendar::addEvents($events); 
-//   return view('fullcalendar', compact('calendar'));
-// }
