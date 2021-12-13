@@ -9,7 +9,11 @@ use Redirect, Response, Auth;
 
 class FullCalendarController extends Controller
 {
-
+  /**
+   * Display full calendar data
+   *
+   * @return \Illuminate\Http\Response
+   */
   public function index()
   {
     if(request()->ajax()) 
@@ -33,7 +37,12 @@ class FullCalendarController extends Controller
     }
   }
 
-
+  /**
+  * Create a calendar event
+  *
+  * @param  \Illuminate\Http\Request $request
+  * @return \Illuminate\Http\Response
+  */
   public function create(Request $request)
   {  
     $insertArr = [ 
@@ -48,7 +57,12 @@ class FullCalendarController extends Controller
     return Response::json($event);
   }
 
-
+  /**
+  * Update a calendar event
+  *
+  * @param  \Illuminate\Http\Request $request
+  * @return \Illuminate\Http\Response
+  */
   public function update(Request $request)
   {   
     $where     = array('id' => $request->id);
@@ -58,7 +72,12 @@ class FullCalendarController extends Controller
     return Response::json($event);
   } 
 
-
+  /**
+  * Delete a calendar event
+  *
+  * @param  \Illuminate\Http\Request $request
+  * @return \Illuminate\Http\Response
+  */
   public function destroy(Request $request)
   {
     $event = Event::where('id',$request->id)->delete();

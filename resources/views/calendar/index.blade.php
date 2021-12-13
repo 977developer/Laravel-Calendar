@@ -37,7 +37,7 @@
 	        <td>{{ $calendar->detail }}</td>
 	        <td>
                 <form action="{{ route('calendars.destroy',$calendar->id) }}" method="POST">
-                    <a class="btn btn-info" href="{{ route('calendars.show',$calendar->id) }}">Show</a>
+                    <a class="btn btn-info" href="{{ route('calendars.show',$calendar->id) }}">View</a>
                     @can('calendar-edit')
                     <a class="btn btn-primary" href="{{ route('calendars.edit',$calendar->id) }}">Edit</a>
                     @endcan

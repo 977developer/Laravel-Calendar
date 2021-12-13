@@ -53,6 +53,5 @@ class UsersSeeder extends Seeder
         foreach ($users as $user) {
           $user->assignRole([$role->id]);
         }
-
     }
 }

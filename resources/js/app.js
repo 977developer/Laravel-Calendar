@@ -20,7 +20,7 @@ $(document).ready(function () {
 	  },
 	  displayEventTime: false,
 	  editable: window.page ? false : true,
-	  eventColor: '#378006',
+	  eventColor: userColor,
 	  eventRender: function (event, element, view) {
 	    if (event.allDay === 'true') {
 	      event.allDay = true;

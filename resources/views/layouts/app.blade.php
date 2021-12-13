@@ -5,9 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ config('app.name', 'Laravel 8 User Roles and Permissions Tutorial') }}</title>
+    <title>{{ config('app.name', 'Demo App') }}</title>
     <script type="text/javascript">
         var SITEURL = "{{url('/')}}/";
+        @if (Auth::check())
+            var userColor = "{{ Auth::user()->color }}";
+        @else 
+            var userColor = '#378006';
+        @endif
     </script>
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -41,6 +46,7 @@
                             <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
                             <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
                         @else
+                            <li><a class="nav-link" href="{{ url('/') }}">{{ __('Public Page') }}</a></li>
                             @role('Admin')
                                 <li><a class="nav-link" href="{{ route('users.index') }}">Manage Users</a></li>
                                 <li><a class="nav-link" href="{{ route('roles.index') }}">Manage Roles</a></li>

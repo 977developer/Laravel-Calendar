@@ -5,7 +5,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\FullCalendarController;
 
 /*
@@ -35,5 +34,4 @@ Route::post('fullcalendar/delete', [FullCalendarController::class, 'destroy']);
 Route::group(['middleware' => ['auth']], function() {
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
-    Route::resource('calendars', CalendarController::class);
 });
