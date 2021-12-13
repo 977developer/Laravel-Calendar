@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CalendarController;
+use App\Http\Controllers\FullCalendarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,11 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('booking', [FullCalendarController::class, 'index']);
+Route::post('fullcalendar/create', [FullCalendarController::class, 'create']);
+Route::post('fullcalendar/update', [FullCalendarController::class, 'update']);
+Route::post('fullcalendar/delete', [FullCalendarController::class, 'destroy']);
 
 Route::group(['middleware' => ['auth']], function() {
     Route::resource('roles', RoleController::class);
